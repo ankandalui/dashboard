@@ -5,18 +5,18 @@ const connectToMongo = require("./Db");
 const cors = require("cors");
 
 
+const { router: taskRouter } = require('./Routes/TaskSchudelued');
+const FetchUser = require("./middleware/FetchUser");
 
 const app = express();
 
 connectToMongo(); // Connect to MongoDB
+
 const port = process.env.PORT || 8000; // Default port 8000
 
-
-//ejs innitialize
+// ejs initialize
 app.set('views', path.join(__dirname, 'views')); // Adjust the path if necessary
 app.set('view engine', 'ejs');
-//
-
 
 // Parse incoming requests with JSON payloads
 app.use(express.json({ limit: "50mb" }));
@@ -29,14 +29,12 @@ app.use(express.urlencoded({ limit: "50mb", extended: true }));
 
 // CORS configuration
 const corsOptions = {
-  origin: [process.env.CLIENT_URL , "http://localhost:3000"],
+  origin: [process.env.CLIENT_URL, "http://localhost:3000"],
   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
   credentials: true, // Allow credentials (cookies, headers)
 };
 
 app.use(cors(corsOptions));
-
-
 
 // Routes
 // Dept--->Task so chasnge this
@@ -45,7 +43,8 @@ app.use(require(path.join(__dirname, "Routes/Leave.js")));
 app.use(require(path.join(__dirname, "Routes/Staff.js")));
 app.use(require(path.join(__dirname, "Routes/Auth/auth.js")));
 
-
+// Add the task routes
+app.use('/api/tasks', taskRouter);
 
 // Test Route
 app.get("/test", (req, res) => {

@@ -4,7 +4,7 @@ const { Schema } = mongoose;
 const StaffSchema = new Schema({
   userId: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'user',
+    ref: 'admin',
   },
   name: {
     type: String,
@@ -60,10 +60,19 @@ const StaffSchema = new Schema({
     type: String,
     required: true,
   },
+  isAvailable: {
+    type: Boolean,
+    default: true,
+  },
+  currentTaskId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'task',
+    default: null,
+  },
   created_at: {
     type: Date,
     default: Date.now,
-    immutable: true, // This ensures the field is set once and cannot be changed
+    immutable: true,
   },
 });
 
