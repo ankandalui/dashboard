@@ -4,8 +4,7 @@ const path = require("path");
 const connectToMongo = require("./Db");
 const cors = require("cors");
 const passport = require('passport');
-const passportAUTH = require('./Passport');
-const passportAuth = require('./Routes/Auth/Passport.auth');
+
 const { router: taskRouter } = require('./Routes/TaskSchudelued');
 const FetchUser = require("./middleware/FetchUser");
 
