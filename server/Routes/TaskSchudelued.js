@@ -173,6 +173,16 @@ const TaskController = {
     }
   },
 
+
+  getStaffDetails: async (req, res) => {
+    try {
+      const staffMembers = await Staff.find().populate('currentTaskId');
+      res.status(200).json({ success: true, staffMembers });
+    } catch (error) {
+      console.error('Error fetching staff details:', error);
+      res.status(500).json({ success: false, error: 'Server error' });
+    }
+  },
   // Get all tasks for a specific staff member
   getStaffTasks: async (req, res) => {
     try {
@@ -282,7 +292,7 @@ router.put('/update-status', FetchUser, [
   body('taskId').notEmpty().withMessage('Task ID is required'),
   body('status').isIn(['pending', 'in-progress', 'completed']).withMessage('Invalid status'),
 ], TaskController.updateTaskStatus);
-
+router.get('/staff-details', FetchUser, TaskController.getStaffDetails);
 router.post('/auto-assign', FetchUser, TaskController.triggerAutoAssign);
 
 router.get('/all-tasks', FetchUser, TaskController.getAllTasks);
