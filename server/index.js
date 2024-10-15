@@ -3,9 +3,7 @@ const express = require("express");
 const path = require("path");
 const connectToMongo = require("./Db");
 const cors = require("cors");
-const passport=require('passport')
-const passportAUTH=require('./Passport')
-const passportAuth=require('./Routes/Auth/Passport.auth')
+
 
 
 const app = express();
@@ -24,9 +22,9 @@ app.set('view engine', 'ejs');
 app.use(express.json({ limit: "50mb" }));
 app.use(express.urlencoded({ limit: "50mb", extended: true }));
 
-app.use('/auth',passportAuth)
 
-app.use(passport.initialize());
+
+
 
 
 // CORS configuration
@@ -41,9 +39,9 @@ app.use(cors(corsOptions));
 
 
 // Routes
-app.use(require(path.join(__dirname, "Routes/Department.js")));
+// Dept--->Task so chasnge this
+// app.use(require(path.join(__dirname, "Routes/Department.js")));
 app.use(require(path.join(__dirname, "Routes/Leave.js")));
-app.use(require(path.join(__dirname, "Routes/Salary.js")));
 app.use(require(path.join(__dirname, "Routes/Staff.js")));
 app.use(require(path.join(__dirname, "Routes/Auth/auth.js")));
 
