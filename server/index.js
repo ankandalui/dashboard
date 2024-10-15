@@ -34,9 +34,9 @@ const corsOptions = {
 app.use(cors(corsOptions));
 
 // Routes
-app.use(require(path.join(__dirname, "Routes/Department.js")));
+
 app.use(require(path.join(__dirname, "Routes/Leave.js")));
-app.use(require(path.join(__dirname, "Routes/Salary.js")));
+
 app.use(require(path.join(__dirname, "Routes/Staff.js")));
 app.use(require(path.join(__dirname, "Routes/Auth/auth.js")));
 
