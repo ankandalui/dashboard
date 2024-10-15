@@ -1,0 +1,736 @@
+{
+    "clientName": "Thunder Client",
+    "collectionName": "EMS",
+    "collectionId": "21702629-6aeb-479b-986a-e47ffc692da1",
+    "dateExported": "2024-10-14T16:26:28.980Z",
+    "version": "1.2",
+    "folders": [
+        {
+            "_id": "ab87b249-428b-43e7-aa6c-cbd9c03d6dd9",
+            "name": "Auth",
+            "containerId": "",
+            "created": "2024-07-20T16:16:42.079Z",
+            "sortNum": 10000
+        },
+        {
+            "_id": "ba83e604-e5ef-4c95-b493-41e6d5e8f6c2",
+            "name": "admin",
+            "containerId": "",
+            "created": "2024-07-21T17:02:09.243Z",
+            "sortNum": 20000
+        },
+        {
+            "_id": "3b45ab09-6e23-4227-803c-18f6fd662800",
+            "name": "Department",
+            "containerId": "",
+            "created": "2024-07-22T08:46:42.463Z",
+            "sortNum": 30000
+        },
+        {
+            "_id": "c288810b-e058-414a-ae20-e5dd1bcae5d1",
+            "name": "apply leave",
+            "containerId": "",
+            "created": "2024-07-23T15:18:55.787Z",
+            "sortNum": 40000
+        },
+        {
+            "_id": "33dbd553-d0a1-411e-a0ea-5d5097accf6e",
+            "name": "staff",
+            "containerId": "",
+            "created": "2024-07-23T16:29:19.843Z",
+            "sortNum": 50000
+        },
+        {
+            "_id": "2f571d8e-91eb-486e-8003-459b3d2d0a4c",
+            "name": "Salary",
+            "containerId": "",
+            "created": "2024-07-27T20:56:06.532Z",
+            "sortNum": 60000
+        }
+    ],
+    "requests": [
+        {
+            "_id": "2acd6ab0-4fad-4f60-adb3-5017426b50dc",
+            "colId": "21702629-6aeb-479b-986a-e47ffc692da1",
+            "containerId": "ab87b249-428b-43e7-aa6c-cbd9c03d6dd9",
+            "name": "create user",
+            "url": "https://employee-management-qwn3.onrender.com/create-user",
+            "method": "POST",
+            "sortNum": 10000,
+            "created": "2024-07-20T16:16:53.405Z",
+            "modified": "2024-10-10T07:02:11.480Z",
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "application/json"
+                }
+            ],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"name\":\"Soumadip Santra\",\n  \"email\":\"riksantra2004@gmail.com\",\n  \"password\":\"daskop\"\n}",
+                "form": []
+            }
+        },
+        {
+            "_id": "d8e0e0b7-449d-4547-aa11-00fc749f3e16",
+            "colId": "21702629-6aeb-479b-986a-e47ffc692da1",
+            "containerId": "ab87b249-428b-43e7-aa6c-cbd9c03d6dd9",
+            "name": "login",
+            "url": "http://localhost:8800/login",
+            "method": "POST",
+            "sortNum": 20000,
+            "created": "2024-07-21T15:51:04.064Z",
+            "modified": "2024-10-10T07:34:00.260Z",
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "application/json"
+                }
+            ],
+            "body": {
+                "type": "json",
+                "raw": "{\n    \n  \"email\":\"test@gmail.com\",\n  \"password\":\"test123\"\n}",
+                "form": []
+            }
+        },
+        {
+            "_id": "790a40b8-7d9d-48fc-a3e5-6716c74184bd",
+            "colId": "21702629-6aeb-479b-986a-e47ffc692da1",
+            "containerId": "ab87b249-428b-43e7-aa6c-cbd9c03d6dd9",
+            "name": "edit User",
+            "url": "http://localhost:8800/editAdmin/66a901b84a3fe286974cf4c7",
+            "method": "PUT",
+            "sortNum": 20000,
+            "created": "2024-07-30T15:28:07.939Z",
+            "modified": "2024-07-30T15:31:39.672Z",
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "application/json"
+                }
+            ],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"name\":\"Soumadip Santra\",\n  \"email\":\"sod@mail.com\"\n}",
+                "form": []
+            }
+        },
+        {
+            "_id": "983324bc-4b4d-4de1-9d9d-7e54ec4ecab1",
+            "colId": "21702629-6aeb-479b-986a-e47ffc692da1",
+            "containerId": "ab87b249-428b-43e7-aa6c-cbd9c03d6dd9",
+            "name": "get-all-admin",
+            "url": "http://localhost:8800/get-all-admin",
+            "method": "GET",
+            "sortNum": 20000,
+            "created": "2024-07-30T16:44:53.305Z",
+            "modified": "2024-07-30T16:45:19.579Z",
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "application/json",
+                    "isDisabled": true
+                }
+            ]
+        },
+        {
+            "_id": "f1a8eef1-93e9-4a91-90a0-5a55cb9742fe",
+            "colId": "21702629-6aeb-479b-986a-e47ffc692da1",
+            "containerId": "ab87b249-428b-43e7-aa6c-cbd9c03d6dd9",
+            "name": "get-user",
+            "url": "http://localhost:8800/get-user",
+            "method": "GET",
+            "sortNum": 30000,
+            "created": "2024-07-21T16:37:27.156Z",
+            "modified": "2024-08-01T16:40:43.959Z",
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "application/json",
+                    "isDisabled": true
+                },
+                {
+                    "name": "token",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjY5ZDJmZmI3ZmFiYzdjODQwNjFkNzVlIn0sImlhdCI6MTcyMTYyOTUwNX0.H03vCO4Gp98YeNyzW0ZnVRAA5HovvbiLj5cxl3sSeW4"
+                }
+            ]
+        },
+        {
+            "_id": "943e94b3-37ac-43d5-b90d-afca45a1cae0",
+            "colId": "21702629-6aeb-479b-986a-e47ffc692da1",
+            "containerId": "ab87b249-428b-43e7-aa6c-cbd9c03d6dd9",
+            "name": "deleet admin",
+            "url": "http://localhost:8800/deleteAdmin/66a901b84a3fe286974cf4c7",
+            "method": "DELETE",
+            "sortNum": 30000,
+            "created": "2024-07-30T15:34:10.929Z",
+            "modified": "2024-07-30T15:35:19.250Z",
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "application/json",
+                    "isDisabled": true
+                }
+            ]
+        },
+        {
+            "_id": "30120d9b-92b9-4aeb-98d4-7f37e4026066",
+            "colId": "21702629-6aeb-479b-986a-e47ffc692da1",
+            "containerId": "ab87b249-428b-43e7-aa6c-cbd9c03d6dd9",
+            "name": "forget-pass",
+            "url": "https://employee-management-uyw0.onrender.com/forget-password",
+            "method": "POST",
+            "sortNum": 30000,
+            "created": "2024-08-16T17:07:04.243Z",
+            "modified": "2024-08-17T09:11:06.611Z",
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "application/json"
+                }
+            ],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \n\"email\":\"soumadipsantra2004@gmail.com\"\n}",
+                "form": []
+            }
+        },
+        {
+            "_id": "86f53eb5-66d6-4e53-b078-6610cc0c0997",
+            "colId": "21702629-6aeb-479b-986a-e47ffc692da1",
+            "containerId": "ba83e604-e5ef-4c95-b493-41e6d5e8f6c2",
+            "name": "add admin",
+            "url": "http://localhost:8800/add-admin",
+            "method": "POST",
+            "sortNum": 40000,
+            "created": "2024-07-21T17:02:22.425Z",
+            "modified": "2024-07-28T16:03:01.527Z",
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "application/json"
+                },
+                {
+                    "name": "token",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjY5ZDJmZmI3ZmFiYzdjODQwNjFkNzVlIn0sImlhdCI6MTcyMTYyOTUwNX0.H03vCO4Gp98YeNyzW0ZnVRAA5HovvbiLj5cxl3sSeW4"
+                }
+            ],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"name\":\"soumakilo\",\n  \"email\":\"soumak489i88lo@gmail.com\",\n \"photo\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQrpZEneLh1WL_0kpeQEvbvHipkPx22W2hKMg&s\"\n}",
+                "form": []
+            }
+        },
+        {
+            "_id": "2873597d-e688-49ca-a6f6-85b9e3c08f40",
+            "colId": "21702629-6aeb-479b-986a-e47ffc692da1",
+            "containerId": "ab87b249-428b-43e7-aa6c-cbd9c03d6dd9",
+            "name": "update user detAILS",
+            "url": "http://localhost:8800/updateDetails/66aba3af18ea7ac68ee988fe",
+            "method": "PUT",
+            "sortNum": 40000,
+            "created": "2024-07-27T15:28:01.749Z",
+            "modified": "2024-08-01T15:09:20.878Z",
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "application/json"
+                },
+                {
+                    "name": "token",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjZhYmEzYWYxOGVhN2FjNjhlZTk4OGZlIn0sImlhdCI6MTcyMjUyNDkwMH0.Vyg65qwRFifMvx3umXfWh-hBI9DOwk1zzeo9IO04iIM"
+                }
+            ],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"name\":\"Soumadip DAS\",\n  \n  \"password\":\"123456789\",\n  \"avatar\":\"https://img.freepik.com/free-photo/abstract-autumn-beauty-multi-colored-leaf-vein-pattern-generated-by-ai_188544-9871.jpg\"\n}",
+                "form": []
+            }
+        },
+        {
+            "_id": "ae593638-cb84-436e-9297-bb2926f74078",
+            "colId": "21702629-6aeb-479b-986a-e47ffc692da1",
+            "containerId": "ab87b249-428b-43e7-aa6c-cbd9c03d6dd9",
+            "name": "reset-pass",
+            "url": "https://employee-management-uyw0.onrender.com/reset-password/66c05c71254185547c7d7e02/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoiNjZjMDVjNzEyNTQxODU1NDdjN2Q3ZTAyIiwiaWF0IjoxNzIzODg1NTYxLCJleHAiOjE3MjM4ODkxNjF9.sXlbpHaIH7dS7CFS8r45UbUXjmIdqq5qqzfucBQnZpY",
+            "method": "GET",
+            "sortNum": 40000,
+            "created": "2024-08-16T17:12:29.429Z",
+            "modified": "2024-08-17T09:07:30.165Z",
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "application/json"
+                }
+            ]
+        },
+        {
+            "_id": "833f0c40-fc45-4e23-b9d2-ba0112adb4c4",
+            "colId": "21702629-6aeb-479b-986a-e47ffc692da1",
+            "containerId": "ba83e604-e5ef-4c95-b493-41e6d5e8f6c2",
+            "name": "get admin",
+            "url": "http://localhost:8800/get-admins",
+            "method": "GET",
+            "sortNum": 50000,
+            "created": "2024-07-22T07:23:43.626Z",
+            "modified": "2024-07-29T19:00:15.291Z",
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "application/json",
+                    "isDisabled": true
+                },
+                {
+                    "name": "token",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjY5ZDJmZmI3ZmFiYzdjODQwNjFkNzVlIn0sImlhdCI6MTcyMTYyOTUwNX0.H03vCO4Gp98YeNyzW0ZnVRAA5HovvbiLj5cxl3sSeW4",
+                    "isDisabled": true
+                }
+            ]
+        },
+        {
+            "_id": "c26873cb-9143-4295-8937-9b8539d1dbeb",
+            "colId": "21702629-6aeb-479b-986a-e47ffc692da1",
+            "containerId": "ba83e604-e5ef-4c95-b493-41e6d5e8f6c2",
+            "name": "edit admin",
+            "url": "http://localhost:8800/edit-admin/66a64730b9f53b9f132ca9bf",
+            "method": "PUT",
+            "sortNum": 60000,
+            "created": "2024-07-22T07:53:58.240Z",
+            "modified": "2024-07-28T13:35:10.940Z",
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "application/json"
+                },
+                {
+                    "name": "token",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjY5ZDJmZmI3ZmFiYzdjODQwNjFkNzVlIn0sImlhdCI6MTcyMTYyOTUwNX0.H03vCO4Gp98YeNyzW0ZnVRAA5HovvbiLj5cxl3sSeW4"
+                }
+            ],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"name\":\"soumadip\",\n  \"photo\":\"https://www.simplilearn.com/ice9/free_resources_article_thumb/what_is_image_Processing.jpg\"\n  \n}",
+                "form": []
+            }
+        },
+        {
+            "_id": "e6ea438a-6412-4e28-a00a-c48bc0418f35",
+            "colId": "21702629-6aeb-479b-986a-e47ffc692da1",
+            "containerId": "ba83e604-e5ef-4c95-b493-41e6d5e8f6c2",
+            "name": "delete admin",
+            "url": "http://localhost:8800/delete-admin/66a64730b9f53b9f132ca9bf",
+            "method": "DELETE",
+            "sortNum": 70000,
+            "created": "2024-07-22T08:28:01.100Z",
+            "modified": "2024-07-28T13:38:12.790Z",
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "application/json",
+                    "isDisabled": true
+                },
+                {
+                    "name": "token",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjY5ZDJmZmI3ZmFiYzdjODQwNjFkNzVlIn0sImlhdCI6MTcyMTYyOTUwNX0.H03vCO4Gp98YeNyzW0ZnVRAA5HovvbiLj5cxl3sSeW4"
+                }
+            ]
+        },
+        {
+            "_id": "779b495b-9897-45a5-ae88-44232b613f59",
+            "colId": "21702629-6aeb-479b-986a-e47ffc692da1",
+            "containerId": "3b45ab09-6e23-4227-803c-18f6fd662800",
+            "name": "add department",
+            "url": "http://localhost:8800/add-department",
+            "method": "POST",
+            "sortNum": 80000,
+            "created": "2024-07-22T08:46:53.193Z",
+            "modified": "2024-07-28T08:07:22.069Z",
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "application/json"
+                },
+                {
+                    "name": "token",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjY5ZDJmZmI3ZmFiYzdjODQwNjFkNzVlIn0sImlhdCI6MTcyMTYyOTUwNX0.H03vCO4Gp98YeNyzW0ZnVRAA5HovvbiLj5cxl3sSeW4"
+                }
+            ],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"deptName\":\"IT87878889\",\n  \"employeeId\":\"so&%$123\"\n}",
+                "form": []
+            }
+        },
+        {
+            "_id": "94f24a67-0f3d-471e-8c65-bd3306ba1a96",
+            "colId": "21702629-6aeb-479b-986a-e47ffc692da1",
+            "containerId": "3b45ab09-6e23-4227-803c-18f6fd662800",
+            "name": "get Department",
+            "url": "http://localhost:8800/get-Departments",
+            "method": "GET",
+            "sortNum": 90000,
+            "created": "2024-07-22T12:03:58.502Z",
+            "modified": "2024-08-01T16:41:06.876Z",
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "application/json",
+                    "isDisabled": true
+                },
+                {
+                    "name": "token",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjZhYmEzYWYxOGVhN2FjNjhlZTk4OGZlIn0sImlhdCI6MTcyMjUzMDEyMn0.tnOeuvms0tSyuKPu2hyULffzYcrj5_tUVXKYTfelWHk"
+                }
+            ]
+        },
+        {
+            "_id": "35eac873-26cb-47ce-b084-ff09780dc3d1",
+            "colId": "21702629-6aeb-479b-986a-e47ffc692da1",
+            "containerId": "3b45ab09-6e23-4227-803c-18f6fd662800",
+            "name": "edit Departmennt",
+            "url": "http://localhost:8800/edit-department/669e49c607448dfde7f840d0",
+            "method": "PUT",
+            "sortNum": 100000,
+            "created": "2024-07-22T12:27:34.668Z",
+            "modified": "2024-07-22T12:29:09.236Z",
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "application/json"
+                },
+                {
+                    "name": "token",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjY5ZDJmZmI3ZmFiYzdjODQwNjFkNzVlIn0sImlhdCI6MTcyMTYyOTUwNX0.H03vCO4Gp98YeNyzW0ZnVRAA5HovvbiLj5cxl3sSeW4"
+                }
+            ],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"deptName\":\"IT899\",\n  \"employeeId\":\"so&%$123\"\n}",
+                "form": []
+            }
+        },
+        {
+            "_id": "d5fdd37e-2076-4db9-b0d9-ead1d470049c",
+            "colId": "21702629-6aeb-479b-986a-e47ffc692da1",
+            "containerId": "3b45ab09-6e23-4227-803c-18f6fd662800",
+            "name": "delete dept",
+            "url": "http://localhost:8800/delete-department/669e46b204b3ea65a938e50f",
+            "method": "DELETE",
+            "sortNum": 110000,
+            "created": "2024-07-22T12:33:55.280Z",
+            "modified": "2024-07-22T12:34:59.854Z",
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "application/json",
+                    "isDisabled": true
+                },
+                {
+                    "name": "token",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjY5ZDJmZmI3ZmFiYzdjODQwNjFkNzVlIn0sImlhdCI6MTcyMTYyOTUwNX0.H03vCO4Gp98YeNyzW0ZnVRAA5HovvbiLj5cxl3sSeW4"
+                }
+            ]
+        },
+        {
+            "_id": "79b55cf6-0e36-45f5-a710-10bcb476c7be",
+            "colId": "21702629-6aeb-479b-986a-e47ffc692da1",
+            "containerId": "c288810b-e058-414a-ae20-e5dd1bcae5d1",
+            "name": "add leave",
+            "url": "http://localhost:8800/add-Leave",
+            "method": "POST",
+            "sortNum": 120000,
+            "created": "2024-07-23T15:33:50.283Z",
+            "modified": "2024-07-23T16:17:36.675Z",
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "application/json"
+                },
+                {
+                    "name": "token",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjY5ZDJmZmI3ZmFiYzdjODQwNjFkNzVlIn0sImlhdCI6MTcyMTYyOTUwNX0.H03vCO4Gp98YeNyzW0ZnVRAA5HovvbiLj5cxl3sSeW4"
+                }
+            ],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"reason\":\"Covid\",\n  \n  \"end\":\"28/12/2024\",\n  \"description\":\" Fever\"\n}",
+                "form": []
+            }
+        },
+        {
+            "_id": "a153786c-21da-4584-892c-bbdf7da3935b",
+            "colId": "21702629-6aeb-479b-986a-e47ffc692da1",
+            "containerId": "c288810b-e058-414a-ae20-e5dd1bcae5d1",
+            "name": "edit leave",
+            "url": "http://localhost:8800/edit-Leave/669fce1388ab707709183512",
+            "method": "PUT",
+            "sortNum": 130000,
+            "created": "2024-07-23T15:37:27.463Z",
+            "modified": "2024-07-23T15:42:02.373Z",
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "application/json"
+                },
+                {
+                    "name": "token",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjY5ZDJmZmI3ZmFiYzdjODQwNjFkNzVlIn0sImlhdCI6MTcyMTYyOTUwNX0.H03vCO4Gp98YeNyzW0ZnVRAA5HovvbiLj5cxl3sSeW4"
+                }
+            ],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"reason\":\"Covid20\",\n  \"start\":\"22/12/2024\",\n  \"end\":\"29/12/2024\",\n  \"description\":\" Fever\"\n}",
+                "form": []
+            }
+        },
+        {
+            "_id": "6f9389cc-926b-4a6c-aaf0-5a91550af1a5",
+            "colId": "21702629-6aeb-479b-986a-e47ffc692da1",
+            "containerId": "c288810b-e058-414a-ae20-e5dd1bcae5d1",
+            "name": "delete leave",
+            "url": "http://localhost:8800/delete-Leave/669fce1388ab707709183512",
+            "method": "DELETE",
+            "sortNum": 140000,
+            "created": "2024-07-23T15:37:42.220Z",
+            "modified": "2024-07-23T15:54:18.217Z",
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "application/json",
+                    "isDisabled": true
+                },
+                {
+                    "name": "token",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjY5ZDJmZmI3ZmFiYzdjODQwNjFkNzVlIn0sImlhdCI6MTcyMTYyOTUwNX0.H03vCO4Gp98YeNyzW0ZnVRAA5HovvbiLj5cxl3sSeW4"
+                }
+            ]
+        },
+        {
+            "_id": "b1366734-c472-44ae-ace9-01980d6f5e3d",
+            "colId": "21702629-6aeb-479b-986a-e47ffc692da1",
+            "containerId": "c288810b-e058-414a-ae20-e5dd1bcae5d1",
+            "name": "view leave",
+            "url": "http://localhost:8800/get-Leaves",
+            "method": "GET",
+            "sortNum": 150000,
+            "created": "2024-07-23T15:38:00.329Z",
+            "modified": "2024-07-23T15:38:41.508Z",
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "application/json",
+                    "isDisabled": true
+                },
+                {
+                    "name": "token",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjY5ZDJmZmI3ZmFiYzdjODQwNjFkNzVlIn0sImlhdCI6MTcyMTYyOTUwNX0.H03vCO4Gp98YeNyzW0ZnVRAA5HovvbiLj5cxl3sSeW4"
+                }
+            ]
+        },
+        {
+            "_id": "6ffc1575-5339-451c-9881-a7b963f867f4",
+            "colId": "21702629-6aeb-479b-986a-e47ffc692da1",
+            "containerId": "33dbd553-d0a1-411e-a0ea-5d5097accf6e",
+            "name": "add staff",
+            "url": "http://localhost:8800/add-Staff",
+            "method": "POST",
+            "sortNum": 160000,
+            "created": "2024-07-23T16:29:38.110Z",
+            "modified": "2024-07-27T06:27:00.240Z",
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "application/json"
+                },
+                {
+                    "name": "token",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjY5ZDJmZmI3ZmFiYzdjODQwNjFkNzVlIn0sImlhdCI6MTcyMTYyOTUwNX0.H03vCO4Gp98YeNyzW0ZnVRAA5HovvbiLj5cxl3sSeW4"
+                }
+            ],
+            "body": {
+                "type": "json",
+                "raw": "{\r\n  \"name\": \"John Doe\",\r\n  \"gender\": \"Male\",\r\n  \"phone\": \"12767890\",\r\n  \"dob\": \"1990-01-01\",\r\n  \"city\": \"New York\",\r\n  \"country\": \"USA\",\r\n  \"department\": \"Engineering\",\r\n  \"email\": \"johndo8822288e@example.com\",\r\n  \"date_of_join\": \"2020-05-01\",\r\n  \"state\": \"NY\",\r\n  \"address\": \"123 Main St, New York, NY 10001\",\r\n  \"photo\": \"https://img.freepik.com/free-photo/colorful-design-with-spiral-design_188544-9588.jpg\"\r\n}\r\n",
+                "form": []
+            }
+        },
+        {
+            "_id": "b6874e2b-8f99-4940-80a8-3b296245d5f9",
+            "colId": "21702629-6aeb-479b-986a-e47ffc692da1",
+            "containerId": "33dbd553-d0a1-411e-a0ea-5d5097accf6e",
+            "name": "get staff",
+            "url": "http://localhost:8800/get-staffs",
+            "method": "GET",
+            "sortNum": 170000,
+            "created": "2024-07-23T16:45:09.265Z",
+            "modified": "2024-07-23T16:46:16.266Z",
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "application/json",
+                    "isDisabled": true
+                },
+                {
+                    "name": "token",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjY5ZDJmZmI3ZmFiYzdjODQwNjFkNzVlIn0sImlhdCI6MTcyMTYyOTUwNX0.H03vCO4Gp98YeNyzW0ZnVRAA5HovvbiLj5cxl3sSeW4"
+                }
+            ]
+        },
+        {
+            "_id": "8a98a768-def1-474b-b154-45e09e273081",
+            "colId": "21702629-6aeb-479b-986a-e47ffc692da1",
+            "containerId": "33dbd553-d0a1-411e-a0ea-5d5097accf6e",
+            "name": "edit staff",
+            "url": "http://localhost:8800/edit-Staff/66a49aa2fabbb2c03ddabd04",
+            "method": "PUT",
+            "sortNum": 180000,
+            "created": "2024-07-23T16:45:24.280Z",
+            "modified": "2024-07-29T12:30:49.026Z",
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "application/json"
+                },
+                {
+                    "name": "token",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjY5ZDJmZmI3ZmFiYzdjODQwNjFkNzVlIn0sImlhdCI6MTcyMTYyOTUwNX0.H03vCO4Gp98YeNyzW0ZnVRAA5HovvbiLj5cxl3sSeW4"
+                }
+            ],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"name\": \"John Doe\",\n  \"gender\": \"Male\",\n  \"phone\": \"12767890\",\n  \"dob\": \"1990-01-01\",\n  \"city\": \"New York\",\n  \"country\": \"USA\",\n  \"department\": \"Engineering\",\n  \"email\": \"johndo8822288e@example.com\",\n  \"date_of_join\": \"2020-05-01\",\n  \"state\": \"NY\",\n  \"address\": \"123 Main St, New York, NY 10001\",\n  \"photo\": \"https://letsenhance.io/static/66c1b6abf8f7cf44c19185254d7adb0c/28ebd/AiArtBefore.jpg\"\n}\n",
+                "form": []
+            }
+        },
+        {
+            "_id": "7b075f58-6a85-42b0-b162-b84b757020af",
+            "colId": "21702629-6aeb-479b-986a-e47ffc692da1",
+            "containerId": "33dbd553-d0a1-411e-a0ea-5d5097accf6e",
+            "name": "delete staff",
+            "url": "http://localhost:8800/delete-Staff/66a498fa1607cbe38728cd59",
+            "method": "DELETE",
+            "sortNum": 190000,
+            "created": "2024-07-23T16:45:36.487Z",
+            "modified": "2024-07-27T06:53:43.612Z",
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "application/json",
+                    "isDisabled": true
+                },
+                {
+                    "name": "token",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjY5ZDJmZmI3ZmFiYzdjODQwNjFkNzVlIn0sImlhdCI6MTcyMTYyOTUwNX0.H03vCO4Gp98YeNyzW0ZnVRAA5HovvbiLj5cxl3sSeW4"
+                }
+            ]
+        },
+        {
+            "_id": "0ef0ae08-2b79-4cda-8a14-6550897baafa",
+            "colId": "21702629-6aeb-479b-986a-e47ffc692da1",
+            "containerId": "2f571d8e-91eb-486e-8003-459b3d2d0a4c",
+            "name": "Edit Salary",
+            "url": "http://localhost:8800/edit-Salary/66a5606bce48038d80e8d99d",
+            "method": "PUT",
+            "sortNum": 200000,
+            "created": "2024-07-27T20:56:16.245Z",
+            "modified": "2024-07-27T21:03:54.324Z",
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "application/json"
+                },
+                {
+                    "name": "token",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjZhNTE2OWFhOWI1ZDUyYmJkYzk3Zjg1In0sImlhdCI6MTcyMjA5NTI1OX0.XtJhAWnBDLNMKzi3O4KJRZ-VqNrJ5v47EO7FjjU0VFU"
+                }
+            ],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"StaffName\":\"Soumadip Santr]]a\",\n  \"department\":\"CSE2029\",\n  \"Paid_Salary\":\"2.5 7M\"\n}",
+                "form": []
+            }
+        },
+        {
+            "_id": "5f5a2df9-b5ef-401d-a393-ba985b6ff160",
+            "colId": "21702629-6aeb-479b-986a-e47ffc692da1",
+            "containerId": "2f571d8e-91eb-486e-8003-459b3d2d0a4c",
+            "name": "Add Salary",
+            "url": "http://localhost:8800/add-Salary",
+            "method": "POST",
+            "sortNum": 210000,
+            "created": "2024-07-27T21:02:48.742Z",
+            "modified": "2024-07-27T21:02:48.742Z",
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "application/json"
+                },
+                {
+                    "name": "token",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjZhNTE2OWFhOWI1ZDUyYmJkYzk3Zjg1In0sImlhdCI6MTcyMjA5NTI1OX0.XtJhAWnBDLNMKzi3O4KJRZ-VqNrJ5v47EO7FjjU0VFU"
+                }
+            ],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"StaffName\":\"Soumadip saha\",\n  \"department\":\"CSE\",\n  \"Paid_Salary\":\"2.5 M\"\n}",
+                "form": []
+            }
+        },
+        {
+            "_id": "17f69bfc-0826-46a7-a1e6-58a4c0952e2a",
+            "colId": "21702629-6aeb-479b-986a-e47ffc692da1",
+            "containerId": "2f571d8e-91eb-486e-8003-459b3d2d0a4c",
+            "name": "Delete Salary",
+            "url": "http://localhost:8800/delete-Salary/66a5606bce48038d80e8d99d",
+            "method": "DELETE",
+            "sortNum": 220000,
+            "created": "2024-07-27T21:04:07.726Z",
+            "modified": "2024-07-27T21:05:40.239Z",
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "application/json",
+                    "isDisabled": true
+                },
+                {
+                    "name": "token",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjZhNTE2OWFhOWI1ZDUyYmJkYzk3Zjg1In0sImlhdCI6MTcyMjA5NTI1OX0.XtJhAWnBDLNMKzi3O4KJRZ-VqNrJ5v47EO7FjjU0VFU"
+                }
+            ]
+        },
+        {
+            "_id": "1e86ebf7-8c78-4827-9dcc-b390140a8d52",
+            "colId": "21702629-6aeb-479b-986a-e47ffc692da1",
+            "containerId": "2f571d8e-91eb-486e-8003-459b3d2d0a4c",
+            "name": "get Salary",
+            "url": "http://localhost:8800/get-all-Salary",
+            "method": "GET",
+            "sortNum": 230000,
+            "created": "2024-07-27T21:05:47.424Z",
+            "modified": "2024-07-27T21:06:26.566Z",
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "application/json",
+                    "isDisabled": true
+                },
+                {
+                    "name": "token",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjZhNTE2OWFhOWI1ZDUyYmJkYzk3Zjg1In0sImlhdCI6MTcyMjA5NTI1OX0.XtJhAWnBDLNMKzi3O4KJRZ-VqNrJ5v47EO7FjjU0VFU"
+                }
+            ]
+        },
+        {
+            "_id": "907c52d5-ac86-4d8e-a3f5-b0b454771ab1",
+            "colId": "21702629-6aeb-479b-986a-e47ffc692da1",
+            "containerId": "ab87b249-428b-43e7-aa6c-cbd9c03d6dd9",
+            "name": "auth test",
+            "url": "http://localhost:8800/auth/google",
+            "method": "GET",
+            "sortNum": 240000,
+            "created": "2024-08-05T17:34:51.587Z",
+            "modified": "2024-08-05T17:38:05.503Z",
+            "headers": []
+        }
+    ],
+    "ref": "sOxx-E3O3KzpL4rqYUbatBHgKCpLicpYUfZvodyf2yo2LJ1-Km1EV81Is_rnTOdtQwoswm-epZxCyJhC2yFHQw"
+}
