@@ -64,34 +64,29 @@ const App = () => {
               </button>
             </TooltipComponent>
           </div>
-          {activeMenu ? (
-            <div className="w-72 fixed sidebar dark:bg-secondary-dark-bg bg-white ">
-              <Sidebar />
-            </div>
-          ) : (
-            <div className="w-0 dark:bg-secondary-dark-bg">
-              <Sidebar />
-            </div>
-          )}
           <div
-            className={
-              activeMenu
-                ? "dark:bg-main-dark-bg  bg-main-bg min-h-screen md:ml-72 w-full  "
-                : "bg-main-bg dark:bg-main-dark-bg  w-full min-h-screen flex-2 "
-            }
+            className={`fixed sidebar dark:bg-secondary-dark-bg bg-white ${
+              activeMenu ? "w-72" : "w-0"
+            } transition-all duration-300 ease-in-out`}
           >
-            <div className="fixed md:static bg-main-bg dark:bg-main-dark-bg navbar w-full ">
+            <Sidebar />
+          </div>
+          <div
+            className={`flex-1 ${
+              activeMenu ? "ml-72" : "ml-0"
+            } transition-all duration-300 ease-in-out`}
+          >
+            <div className="fixed md:static bg-main-bg dark:bg-main-dark-bg w-full">
               <Navbar />
             </div>
-            <div>
+            <div className="m-2 md:m-10 mt-24 p-2 md:p-10 bg-white rounded-3xl">
               {themeSettings && <ThemeSettings />}
-
               <Routes>
-                {/* dashboard  */}
+                {/* Dashboard */}
                 <Route path="/" element={<Ecommerce />} />
                 <Route path="/ecommerce" element={<Ecommerce />} />
 
-                {/* pages  */}
+                {/* Pages */}
                 <Route path="/orders" element={<Orders />} />
                 <Route path="/employees" element={<Employees />} />
                 <Route path="/customers" element={<Customers />} />
@@ -101,13 +96,13 @@ const App = () => {
                   element={<EmployeeManagement />}
                 />
 
-                {/* apps  */}
+                {/* Apps */}
                 <Route path="/kanban" element={<Kanban />} />
                 <Route path="/editor" element={<Editor />} />
                 <Route path="/calendar" element={<Calendar />} />
                 <Route path="/color-picker" element={<ColorPicker />} />
 
-                {/* charts  */}
+                {/* Charts */}
                 <Route path="/line" element={<Line />} />
                 <Route path="/area" element={<Area />} />
                 <Route path="/bar" element={<Bar />} />
