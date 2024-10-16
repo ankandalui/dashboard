@@ -27,6 +27,7 @@ import {
 import "./App.css";
 
 import { useStateContext } from "./contexts/ContextProvider";
+import OrgChart from "./pages/OrgChart";
 
 const App = () => {
   const {
@@ -95,6 +96,7 @@ const App = () => {
                   path="/employeemanage"
                   element={<EmployeeManagement />}
                 />
+                <Route path="/orgchart" element={<OrgChart />} />
 
                 {/* Apps */}
                 <Route path="/kanban" element={<Kanban />} />
