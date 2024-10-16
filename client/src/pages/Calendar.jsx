@@ -500,6 +500,7 @@
 import React, { useState, useMemo } from "react";
 import ScheduleModal from "./Charts/CalenderScheduled";
 import AddEmployeeModal from "./AddEmployeeModal";
+import ActionsMenu from "./ActionMenu";
 import {
   format,
   addDays,
@@ -587,13 +588,106 @@ const EmployeeScheduleCalendar = () => {
   const [showScheduleModal, setShowScheduleModal] = useState(false);
   const [selectedDate, setSelectedDate] = useState(null);
   const [showAddEmployeeModal, setShowAddEmployeeModal] = useState(false);
+  const [showTimesheetOptions, setShowTimesheetOptions] = useState(false);
+  const [showCellOptions, setShowCellOptions] = useState(false);
+  const [selectedCell, setSelectedCell] = useState(null);
 
+
+  const handleCellClick = (date, hour, employeeIndex) => {
+    setSelectedDate(new Date(date.setHours(hour)));
+    setSelectedCell({ date, hour, employeeIndex });
+    setShowCellOptions(true);
+  };
   const handleAddEmployee = (newEmployee) => {
     setEmployees((prevEmployees) => [...prevEmployees, newEmployee]);
   };
-  const handleCellClick = (date, hour) => {
-    setSelectedDate(new Date(date.setHours(hour)));
-    setShowScheduleModal(true);
+  // const handleCellClick = (date, hour) => {
+  //   setSelectedDate(new Date(date.setHours(hour)));
+  //   setShowScheduleModal(true);
+  // };
+  const handleTimesheet = (timesheetData) => {
+    // Implement the logic to add or update timesheet entry
+    console.log("Timesheet data:", timesheetData);
+    // You would typically update the employee's timesheet here
+    setShowCellOptions(false);
+  };
+
+  const handleTimesheetClick = () => {
+    setShowTimesheetModal(true);
+  };
+
+  const exportTimesheet = (format) => {
+    // Implement the logic to export timesheet
+    console.log(`Exporting timesheet as ${format}`);
+    // You would typically generate and download the timesheet file here
+    setShowTimesheetOptions(false);
+  };
+
+  const CellOptionsModal = ({ isOpen, onClose, date, hour, employeeIndex }) => {
+    if (!isOpen) return null;
+
+    return (
+      <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+        <div className="bg-white p-6 rounded-lg w-96">
+          <div className="flex justify-between items-center mb-4">
+            <h2 className="text-xl font-bold">Options</h2>
+            <button onClick={onClose}>
+              <X className="w-6 h-6" />
+            </button>
+          </div>
+          <button
+            className="w-full mb-2 px-4 py-2 bg-blue-500 text-white rounded-md"
+            onClick={() => {
+              setShowScheduleModal(true);
+              onClose();
+            }}
+          >
+            Schedule
+          </button>
+          <button
+            className="w-full px-4 py-2 bg-green-500 text-white rounded-md"
+            onClick={() => handleTimesheet({ date, hour, employeeIndex })}
+          >
+            Timesheet
+          </button>
+        </div>
+      </div>
+    );
+  };
+
+  const TimesheetOptionsModal = ({ isOpen, onClose }) => {
+    if (!isOpen) return null;
+
+    return (
+      <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+        <div className="bg-white p-6 rounded-lg w-96">
+          <div className="flex justify-between items-center mb-4">
+            <h2 className="text-xl font-bold">Timesheet Options</h2>
+            <button onClick={onClose}>
+              <X className="w-6 h-6" />
+            </button>
+          </div>
+          <button
+            className="w-full mb-2 px-4 py-2 bg-blue-500 text-white rounded-md"
+            onClick={() => exportTimesheet('PDF')}
+          >
+            Export as PDF
+          </button>
+          <button
+            className="w-full mb-2 px-4 py-2 bg-green-500 text-white rounded-md"
+            onClick={() => exportTimesheet('CSV')}
+          >
+            Export as CSV
+          </button>
+          <button
+            className="w-full px-4 py-2 bg-yellow-500 text-white rounded-md"
+            onClick={() => exportTimesheet('Excel')}
+          >
+            Export as Excel
+          </button>
+        </div>
+      </div>
+    );
   };
 
   const handleSchedule = (scheduleData) => {
@@ -615,65 +709,73 @@ const EmployeeScheduleCalendar = () => {
     });
   };
   const handleEventClick = (event) => {
-    setSelectedEvent(event);
-    setShowEventModal(true);
+    if (event) {  // Add this check
+      setSelectedEvent(event);
+      setShowEventModal(true);
+    }
   };
 
-  const handleTimesheetClick = () => {
-    setShowTimesheetModal(true);
+ 
+  const EventModal = ({ event, onClose }) => {
+    if (!event) {
+      return null; // Or you could render a message like "No event selected"
+    }
+  
+    return (
+      <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+        <div className="bg-white p-6 rounded-lg w-96">
+          <div className="flex justify-between items-center mb-4">
+            <h2 className="text-xl font-bold">{event.title}</h2>
+            <button onClick={onClose}>
+              <X className="w-6 h-6" />
+            </button>
+          </div>
+          <p><strong>Job:</strong> {event.job}</p>
+          <p><strong>Start:</strong> {format(event.start, "PPpp")}</p>
+          <p><strong>End:</strong> {format(event.end, "PPpp")}</p>
+          <button
+            className="mt-4 px-4 py-2 bg-blue-500 text-white rounded-md"
+            onClick={onClose}
+          >
+            Close
+          </button>
+        </div>
+      </div>
+    );
   };
-  const EventModal = ({ event, onClose }) => (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-      <div className="bg-white p-6 rounded-lg w-96">
-        <div className="flex justify-between items-center mb-4">
-          <h2 className="text-xl font-bold">{event.title}</h2>
-          <button onClick={onClose}>
-            <X className="w-6 h-6" />
+  const TimesheetModal = ({ onClose }) => {
+    if (!showTimesheetModal) return null;
+
+    return (
+      <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+        <div className="bg-white p-6 rounded-lg w-96 max-h-[90vh] overflow-y-auto">
+          <div className="flex justify-between items-center mb-4">
+            <h2 className="text-xl font-bold">Timesheet</h2>
+            <button onClick={onClose} className="text-gray-500 hover:text-gray-700">
+              <X className="w-6 h-6" />
+            </button>
+          </div>
+          <div className="mb-4">
+            <h3 className="font-bold mb-2">This Week's Hours</h3>
+            <p>Monday: 8 hours</p>
+            <p>Tuesday: 7.5 hours</p>
+            <p>Wednesday: 8 hours</p>
+            <p>Thursday: 8 hours</p>
+            <p>Friday: 6 hours</p>
+          </div>
+          <div>
+            <h3 className="font-bold mb-2">Total Hours: 37.5</h3>
+          </div>
+          <button
+            className="mt-4 px-4 py-2 bg-blue-500 text-white rounded-md w-full"
+            onClick={onClose}
+          >
+            Close
           </button>
         </div>
-        <p><strong>Job:</strong> {event.job}</p>
-        <p><strong>Start:</strong> {format(event.start, "PPpp")}</p>
-        <p><strong>End:</strong> {format(event.end, "PPpp")}</p>
-        <button
-          className="mt-4 px-4 py-2 bg-blue-500 text-white rounded-md"
-          onClick={onClose}
-        >
-          Close
-        </button>
       </div>
-    </div>
-  );
-
-  const TimesheetModal = ({ onClose }) => (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-      <div className="bg-white p-6 rounded-lg w-96">
-        <div className="flex justify-between items-center mb-4">
-          <h2 className="text-xl font-bold">Timesheet</h2>
-          <button onClick={onClose}>
-            <X className="w-6 h-6" />
-          </button>
-        </div>
-        <div className="mb-4">
-          <h3 className="font-bold mb-2">This Week's Hours</h3>
-          <p>Monday: 8 hours</p>
-          <p>Tuesday: 7.5 hours</p>
-          <p>Wednesday: 8 hours</p>
-          <p>Thursday: 8 hours</p>
-          <p>Friday: 6 hours</p>
-        </div>
-        <div>
-          <h3 className="font-bold mb-2">Total Hours: 37.5</h3>
-        </div>
-        <button
-          className="mt-4 px-4 py-2 bg-blue-500 text-white rounded-md"
-          onClick={onClose}
-        >
-          Close
-        </button>
-      </div>
-    </div>
-  );
-
+    );
+  };
   const toggleEmployeeExpansion = (employeeName) => {
     setExpandedEmployee(
       expandedEmployee === employeeName ? null : employeeName
@@ -803,7 +905,8 @@ const EmployeeScheduleCalendar = () => {
       employee.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
       employee.city.toLowerCase().includes(searchTerm.toLowerCase())
   );
-
+ 
+  
   const Calendar = ({ date, onChange }) => {
     const monthStart = startOfMonth(date);
     const monthEnd = endOfMonth(date);
@@ -953,9 +1056,10 @@ const EmployeeScheduleCalendar = () => {
               <option value="month">Month</option>
               <option value="year">Year</option>
             </select>
-            <button className="px-4 py-1 bg-gray-200 rounded-md">
+            {/* <button className="px-4 py-1 bg-gray-200 rounded-md">
               Actions
-            </button>
+            </button> */}
+            <ActionsMenu />
             <button className="px-4 py-1 bg-green-500 text-white rounded-md">
               Publish 2 Shifts
             </button>
@@ -1035,7 +1139,7 @@ const EmployeeScheduleCalendar = () => {
                         className="border-r p-1 relative h-16"
                         onDragOver={handleDragOver}
                         onDrop={(e) => handleDrop(e, index, hour)}
-                        onClick={() => handleCellClick(currentDate, hour)}
+                        onClick={() => handleCellClick(currentDate, hour, index)}
                       >
                           {employee.events
                             .filter(
@@ -1135,12 +1239,29 @@ const EmployeeScheduleCalendar = () => {
 
       {/* Timesheet Modal */}
       {showTimesheetModal && (
-        <TimesheetModal onClose={() => setShowTimesheetModal(false)} />
-      )}
+    <TimesheetModal onClose={() => setShowTimesheetModal(false)} />
+      
+)}
       <AddEmployeeModal
         isOpen={showAddEmployeeModal}
         onClose={() => setShowAddEmployeeModal(false)}
         onAddEmployee={handleAddEmployee}
+      />
+      <CellOptionsModal
+        isOpen={showCellOptions}
+        onClose={() => setShowCellOptions(false)}
+        {...selectedCell}
+      />
+      <TimesheetOptionsModal
+        isOpen={showTimesheetOptions}
+        onClose={() => setShowTimesheetOptions(false)}
+      />
+       <EventModal 
+        event={selectedEvent} 
+        onClose={() => setShowEventModal(false)} 
+      />
+      <TimesheetModal 
+        onClose={() => setShowTimesheetModal(false)} 
       />
       </div>
     </div>
