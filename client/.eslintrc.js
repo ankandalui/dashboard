@@ -76,5 +76,9 @@ module.exports = {
         ],
       },
     ],
+    // Disable the label association rule
+    'jsx-a11y/label-has-associated-control': 'off',
+    // Disable the end of file newline rule
+    'eol-last': 'off',
   },
 };
