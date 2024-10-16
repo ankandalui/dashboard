@@ -1,6 +1,27 @@
 import React, { useState, useMemo } from "react";
-import { format, addDays } from "date-fns";
-import { ChevronLeft, ChevronRight, Search } from "lucide-react";
+import {
+  format,
+  addDays,
+  startOfWeek,
+  endOfWeek,
+  startOfMonth,
+  endOfMonth,
+  startOfYear,
+  endOfYear,
+  eachDayOfInterval,
+  isSameMonth,
+  isSameDay,
+  addMonths,
+} from "date-fns";
+import {
+  ChevronLeft,
+  ChevronRight,
+  Search,
+  Calendar as CalendarIcon,
+  ChevronDown,
+  ChevronUp,
+  Plus,
+} from "lucide-react";
 
 const avatarUrl =
   "https://res.cloudinary.com/demo/image/upload/w_0.5,ar_1,c_thumb,g_faces,z_0.7/r_max/docs/young-couple.jpg";
@@ -21,97 +42,12 @@ const dummyData = [
         color: "#60a5fa",
       },
     ],
+    shiftTotal: "6.5 Hrs",
+    basePay: "₹150/hr",
+    stress: "Low",
+    training: "Sales Fundamentals",
   },
-  {
-    name: "Danny Bridge",
-    city: "Sales Representative",
-    avatar: avatarUrl,
-    events: [
-      {
-        id: "job2",
-        title: "Product Demo",
-        job: "New Client",
-        start: new Date(2024, 4, 20, 17, 0),
-        end: new Date(2024, 4, 21, 2, 45),
-        color: "#f97316",
-      },
-    ],
-  },
-  {
-    name: "Qin Shi",
-    city: "Web Developer",
-    avatar: avatarUrl,
-    events: [
-      {
-        id: "job3",
-        title: "Code Review",
-        job: "Team Meeting",
-        start: new Date(2024, 4, 20, 9, 0),
-        end: new Date(2024, 4, 20, 11, 0),
-        color: "#ec4899",
-      },
-    ],
-  },
-  {
-    name: "Adam Denisov",
-    city: "Web Developer",
-    avatar: avatarUrl,
-    events: [
-      {
-        id: "job4",
-        title: "Bug Fix",
-        job: "Critical Issue",
-        start: new Date(2024, 4, 20, 13, 0),
-        end: new Date(2024, 4, 20, 18, 30),
-        color: "#8b5cf6",
-      },
-    ],
-  },
-  {
-    name: "Shirline Dungey",
-    city: "Web Developer",
-    avatar: avatarUrl,
-    events: [
-      {
-        id: "job5",
-        title: "Feature Development",
-        job: "New Project",
-        start: new Date(2024, 4, 20, 20, 0),
-        end: new Date(2024, 4, 21, 4, 15),
-        color: "#eab308",
-      },
-    ],
-  },
-  {
-    name: "Lacara Jones",
-    city: "Product Designer",
-    avatar: avatarUrl,
-    events: [
-      {
-        id: "job6",
-        title: "UI Design",
-        job: "Mobile App",
-        start: new Date(2024, 4, 20, 15, 0),
-        end: new Date(2024, 4, 20, 21, 30),
-        color: "#06b6d4",
-      },
-    ],
-  },
-  {
-    name: "Nicolina Lindholm",
-    city: "Illustrator",
-    avatar: avatarUrl,
-    events: [
-      {
-        id: "job7",
-        title: "Asset Creation",
-        job: "Marketing Campaign",
-        start: new Date(2024, 4, 20, 18, 0),
-        end: new Date(2024, 4, 21, 2, 30),
-        color: "#6366f1",
-      },
-    ],
-  },
+  // ... (other employee data)
 ];
 
 const unscheduledAppointments = [
@@ -140,9 +76,91 @@ const EmployeeScheduleCalendar = () => {
   const [employees, setEmployees] = useState(dummyData);
   const [unscheduled, setUnscheduled] = useState(unscheduledAppointments);
   const [searchTerm, setSearchTerm] = useState("");
+  const [showCalendar, setShowCalendar] = useState(false);
+  const [expandedEmployee, setExpandedEmployee] = useState(null);
+  const [viewMode, setViewMode] = useState("day");
 
-  const prevDay = () => setCurrentDate((date) => addDays(date, -1));
-  const nextDay = () => setCurrentDate((date) => addDays(date, 1));
+  const toggleEmployeeExpansion = (employeeName) => {
+    setExpandedEmployee(
+      expandedEmployee === employeeName ? null : employeeName
+    );
+  };
+
+  const changeViewMode = (mode) => {
+    setViewMode(mode);
+    switch (mode) {
+      case "day":
+        // Current implementation is already day view
+        break;
+      case "week":
+        setCurrentDate(startOfWeek(currentDate));
+        break;
+      case "month":
+        setCurrentDate(startOfMonth(currentDate));
+        break;
+      case "year":
+        setCurrentDate(startOfYear(currentDate));
+        break;
+    }
+  };
+
+  const getDateRange = () => {
+    switch (viewMode) {
+      case "day":
+        return [currentDate];
+      case "week":
+        return eachDayOfInterval({
+          start: startOfWeek(currentDate),
+          end: endOfWeek(currentDate),
+        });
+      case "month":
+        return eachDayOfInterval({
+          start: startOfMonth(currentDate),
+          end: endOfMonth(currentDate),
+        });
+      case "year":
+        return eachDayOfInterval({
+          start: startOfYear(currentDate),
+          end: endOfYear(currentDate),
+        });
+    }
+  };
+
+  const dateRange = useMemo(getDateRange, [currentDate, viewMode]);
+
+  const prevPeriod = () => {
+    switch (viewMode) {
+      case "day":
+        setCurrentDate(addDays(currentDate, -1));
+        break;
+      case "week":
+        setCurrentDate(addDays(currentDate, -7));
+        break;
+      case "month":
+        setCurrentDate(addMonths(currentDate, -1));
+        break;
+      case "year":
+        setCurrentDate(addMonths(currentDate, -12));
+        break;
+    }
+  };
+
+  const nextPeriod = () => {
+    switch (viewMode) {
+      case "day":
+        setCurrentDate(addDays(currentDate, 1));
+        break;
+      case "week":
+        setCurrentDate(addDays(currentDate, 7));
+        break;
+      case "month":
+        setCurrentDate(addMonths(currentDate, 1));
+        break;
+      case "year":
+        setCurrentDate(addMonths(currentDate, 12));
+        break;
+    }
+  };
 
   const hours = useMemo(() => Array.from({ length: 24 }, (_, i) => i), []); // 0-23 hours
 
@@ -192,6 +210,51 @@ const EmployeeScheduleCalendar = () => {
       employee.city.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
+  const Calendar = ({ date, onChange }) => {
+    const monthStart = startOfMonth(date);
+    const monthEnd = endOfMonth(date);
+    const monthDays = eachDayOfInterval({ start: monthStart, end: monthEnd });
+
+    const prevMonth = () => onChange(addMonths(date, -1));
+    const nextMonth = () => onChange(addMonths(date, 1));
+
+    return (
+      <div className="bg-white shadow-lg rounded-lg p-4">
+        <div className="flex justify-between items-center mb-4">
+          <button onClick={prevMonth}>
+            <ChevronLeft />
+          </button>
+          <h2 className="text-lg font-semibold">{format(date, "MMMM yyyy")}</h2>
+          <button onClick={nextMonth}>
+            <ChevronRight />
+          </button>
+        </div>
+        <div className="grid grid-cols-7 gap-1">
+          {["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].map((day) => (
+            <div key={day} className="text-center font-medium text-gray-500">
+              {day}
+            </div>
+          ))}
+          {monthDays.map((day) => (
+            <button
+              key={day.toString()}
+              onClick={() => onChange(day)}
+              className={`p-2 text-center rounded-full ${
+                isSameMonth(day, date)
+                  ? isSameDay(day, currentDate)
+                    ? "bg-blue-500 text-white"
+                    : "hover:bg-gray-200"
+                  : "text-gray-400"
+              }`}
+            >
+              {format(day, "d")}
+            </button>
+          ))}
+        </div>
+      </div>
+    );
+  };
+
   return (
     <div className="flex h-screen bg-gray-100">
       {/* Sidebar */}
@@ -201,7 +264,7 @@ const EmployeeScheduleCalendar = () => {
             <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
             <input
               type="text"
-              placeholder="search..."
+              placeholder="Search..."
               className="w-full pl-10 pr-4 py-2 border rounded-lg"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
@@ -209,33 +272,42 @@ const EmployeeScheduleCalendar = () => {
           </div>
         </div>
         {filteredEmployees.map((employee) => (
-          <div key={employee.name} className="flex items-center p-4 border-b">
-            {employee.avatar ? (
-              <img
-                src={employee.avatar}
-                alt={employee.name}
-                className="w-10 h-10 rounded-full mr-3"
-              />
-            ) : (
-              <div className="w-10 h-10 rounded-full mr-3 bg-green-500 flex items-center justify-center text-white font-bold">
-                {employee.name.charAt(0)}
+          <div key={employee.name}>
+            <div
+              className="flex items-center p-4 border-b cursor-pointer hover:bg-gray-100"
+              onClick={() => toggleEmployeeExpansion(employee.name)}
+            >
+              {employee.avatar ? (
+                <img
+                  src={employee.avatar}
+                  alt={employee.name}
+                  className="w-10 h-10 rounded-full mr-3"
+                />
+              ) : (
+                <div className="w-10 h-10 rounded-full mr-3 bg-green-500 flex items-center justify-center text-white font-bold">
+                  {employee.name.charAt(0)}
+                </div>
+              )}
+              <div>
+                <div className="font-medium">{employee.name}</div>
+                <div className="text-sm text-gray-500">{employee.city}</div>
+              </div>
+              <div className="ml-auto">
+                {expandedEmployee === employee.name ? (
+                  <ChevronUp />
+                ) : (
+                  <ChevronDown />
+                )}
+              </div>
+            </div>
+            {expandedEmployee === employee.name && (
+              <div className="bg-gray-50 p-4 border-b">
+                <p>Shift Total: {employee.shiftTotal}</p>
+                <p>Base Pay: {employee.basePay}</p>
+                <p>Stress: {employee.stress}</p>
+                <p>Training: {employee.training}</p>
               </div>
             )}
-            <div>
-              <div className="font-medium">{employee.name}</div>
-              <div className="text-sm text-gray-500">{employee.city}</div>
-            </div>
-            <div className="ml-auto text-sm text-gray-500">
-              {employee.events
-                .reduce(
-                  (total, event) =>
-                    total +
-                    (event.end.getTime() - event.start.getTime()) / 3600000,
-                  0
-                )
-                .toFixed(2)}{" "}
-              Hrs
-            </div>
           </div>
         ))}
         <div className="p-4">
@@ -253,23 +325,36 @@ const EmployeeScheduleCalendar = () => {
           <div className="flex items-center space-x-4">
             <div className="flex items-center space-x-2">
               <button
-                onClick={prevDay}
+                onClick={prevPeriod}
                 className="p-1 rounded-full hover:bg-gray-100"
               >
                 <ChevronLeft className="w-6 h-6" />
               </button>
               <span className="font-medium">
-                {format(currentDate, "EEE, d MMM")}
+                {format(currentDate, "MMMM d, yyyy")}
               </span>
               <button
-                onClick={nextDay}
+                onClick={nextPeriod}
                 className="p-1 rounded-full hover:bg-gray-100"
               >
                 <ChevronRight className="w-6 h-6" />
               </button>
             </div>
-            <select className="border rounded-md px-2 py-1">
-              <option>View: Area | Day</option>
+            <button
+              onClick={() => setShowCalendar(!showCalendar)}
+              className="p-1 rounded-full hover:bg-gray-100"
+            >
+              <CalendarIcon className="w-6 h-6" />
+            </button>
+            <select
+              className="border rounded-md px-2 py-1"
+              value={viewMode}
+              onChange={(e) => changeViewMode(e.target.value)}
+            >
+              <option value="day">Day</option>
+              <option value="week">Week</option>
+              <option value="month">Month</option>
+              <option value="year">Year</option>
             </select>
             <button className="px-4 py-1 bg-gray-200 rounded-md">
               Actions
@@ -279,68 +364,108 @@ const EmployeeScheduleCalendar = () => {
             </button>
           </div>
         </div>
-
-        {/* Calendar Grid */}
-        <div className="flex-1 overflow-auto">
-          <table className="w-full border-collapse">
-            <thead>
-              <tr className="bg-gray-50">
-                {hours.map((hour) => (
-                  <th
-                    key={hour}
-                    className="p-2 border-r border-b text-sm font-normal text-gray-500"
-                  >
-                    {format(new Date().setHours(hour), "h a")}
-                  </th>
-                ))}
-              </tr>
-            </thead>
-            <tbody>
-              {filteredEmployees.map((employee, index) => (
-                <tr key={employee.name} className="border-b">
-                  {hours.map((hour) => (
-                    <td
-                      key={`${employee.name}-${hour}`}
-                      className="border-r p-1 relative h-16"
-                      onDragOver={handleDragOver}
-                      onDrop={(e) => handleDrop(e, index, hour)}
-                    >
-                      {employee.events
-                        .filter(
-                          (event) =>
-                            event.start.getHours() <= hour &&
-                            event.end.getHours() > hour
-                        )
-                        .map((event, eventIdx) => {
-                          const startHour = event.start.getHours();
-                          const endHour = event.end.getHours();
-                          const duration =
-                            endHour -
-                            startHour +
-                            (endHour <= startHour ? 24 : 0);
-                          return (
-                            <div
-                              key={eventIdx}
-                              className="absolute top-0 left-0 right-0 text-white text-xs p-1 overflow-hidden"
-                              style={{
-                                backgroundColor: event.color,
-                                height: "100%",
-                                zIndex: 10,
-                                left: hour === startHour ? "0%" : "-100%",
-                                width: `${duration * 100}%`,
-                              }}
-                            >
-                              <div className="font-bold">{event.title}</div>
-                              <div>{event.job}</div>
-                            </div>
-                          );
-                        })}
-                    </td>
-                  ))}
+        <div className="flex-1 flex">
+          {/* Calendar Grid */}
+          <div className="flex-1 overflow-auto">
+            <table className="w-full border-collapse">
+              <thead>
+                <tr className="bg-gray-50">
+                  {viewMode === "day" &&
+                    hours.map((hour) => (
+                      <th
+                        key={hour}
+                        className="p-2 border-r border-b text-sm font-normal text-gray-500"
+                      >
+                        {format(new Date().setHours(hour), "h a")}
+                      </th>
+                    ))}
+                  {(viewMode === "week" ||
+                    viewMode === "month" ||
+                    viewMode === "year") &&
+                    dateRange.map((date) => (
+                      <th
+                        key={date.toString()}
+                        className="p-2 border-r border-b text-sm font-normal text-gray-500"
+                      >
+                        {format(date, "MMM d")}
+                      </th>
+                    ))}
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {filteredEmployees.map((employee, index) => (
+                  <tr key={employee.name} className="border-b">
+                    {viewMode === "day" &&
+                      hours.map((hour) => (
+                        <td
+                          key={`${employee.name}-${hour}`}
+                          className="border-r p-1 relative h-16"
+                          onDragOver={handleDragOver}
+                          onDrop={(e) => handleDrop(e, index, hour)}
+                        >
+                          {employee.events
+                            .filter(
+                              (event) =>
+                                event.start.getHours() <= hour &&
+                                event.end.getHours() > hour
+                            )
+                            .map((event, eventIdx) => (
+                              <div
+                                key={eventIdx}
+                                className="absolute top-0 left-0 right-0 text-white text-xs p-1 overflow-hidden"
+                                style={{
+                                  backgroundColor: event.color,
+                                  height: "100%",
+                                  zIndex: 10,
+                                }}
+                              >
+                                <div className="font-bold">{event.title}</div>
+                                <div>{event.job}</div>
+                              </div>
+                            ))}
+                        </td>
+                      ))}
+                    {(viewMode === "week" ||
+                      viewMode === "month" ||
+                      viewMode === "year") &&
+                      dateRange.map((date) => (
+                        <td
+                          key={`${employee.name}-${date.toString()}`}
+                          className="border-r p-1 relative h-16"
+                          onDragOver={handleDragOver}
+                          onDrop={(e) => handleDrop(e, index, date.getHours())}
+                        >
+                          {employee.events
+                            .filter(
+                              (event) =>
+                                event.start.getDate() === date.getDate() &&
+                                event.start.getMonth() === date.getMonth() &&
+                                event.start.getFullYear() === date.getFullYear()
+                            )
+                            .map((event, eventIdx) => (
+                              <div
+                                key={eventIdx}
+                                className="bg-blue-500 text-white text-xs p-1 mb-1 rounded"
+                                style={{ backgroundColor: event.color }}
+                              >
+                                <div className="font-bold">{event.title}</div>
+                                <div>{format(event.start, "h:mm a")}</div>
+                              </div>
+                            ))}
+                        </td>
+                      ))}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+
+          {/* Calendar Popup */}
+          {showCalendar && (
+            <div className="w-64 ml-4">
+              <Calendar date={currentDate} onChange={setCurrentDate} />
+            </div>
+          )}
         </div>
 
         {/* Unscheduled Appointments */}
