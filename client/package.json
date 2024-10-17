@@ -6,6 +6,10 @@
     "@cloudinary/react": "^1.13.0",
     "@cloudinary/url-gen": "^1.19.0",
     "@headlessui/react": "^2.1.10",
+    "@radix-ui/react-dialog": "^1.1.2",
+    "@radix-ui/react-popover": "^1.1.2",
+    "@radix-ui/react-select": "^2.1.2",
+    "@radix-ui/react-slot": "^1.1.0",
     "@syncfusion/ej2": "^19.4.48",
     "@syncfusion/ej2-react-calendars": "^19.4.48",
     "@syncfusion/ej2-react-charts": "^19.4.50",
@@ -20,6 +24,8 @@
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^16.0.1",
     "@testing-library/user-event": "^13.5.0",
+    "class-variance-authority": "^0.7.0",
+    "clsx": "^2.1.1",
     "date-fns": "^4.1.0",
     "dotenv": "^16.4.5",
     "lucide-react": "^0.453.0",
@@ -33,6 +39,7 @@
     "react-router-dom": "^6.2.1",
     "react-scripts": "^5.0.1",
     "react-table": "^7.8.0",
+    "tailwind-merge": "^2.5.4",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
